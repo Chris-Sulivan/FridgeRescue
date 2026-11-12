@@ -1,0 +1,54 @@
+.expiration-alert {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.expiration-alert__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.expiration-alert__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.expiration-alert__warning {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 600;
+}
+
+.expiration-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.expiration-badge--green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.expiration-badge--yellow {
+  background: #fde68a;
+  color: #713f12;
+}
+
+.expiration-badge--red {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 2px solid #b91c1c;
+}
