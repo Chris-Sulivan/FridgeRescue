@@ -1,4 +1,5 @@
 import { getDaysLeft, getExpirationStatus } from '../utils/expiration'
+import { formatQuantity } from '../utils/format'
 import ExpirationBadge from './ExpirationBadge'
 import './ExpirationAlert.css'
 
@@ -29,7 +30,7 @@ function ExpirationAlert({ items = [] }) {
         {alerts.map((item) => (
           <li key={item.id} className="expiration-alert__item">
             <span>
-              <strong>{item.name}</strong> · {item.category} · {item.quantity} {item.unit}
+              <strong>{item.name}</strong> · {item.category} · {formatQuantity(item.quantity, item.unit)}
             </span>
             <ExpirationBadge expirationDate={item.expirationDate} />
           </li>
