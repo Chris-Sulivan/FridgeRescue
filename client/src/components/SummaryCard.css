@@ -1,0 +1,44 @@
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+  border: 2px solid #1f2937;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.summary-card:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+
+.summary-card:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.summary-card__value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.summary-card__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.summary-card--green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.summary-card--yellow {
+  background: #fde68a;
+  color: #713f12;
+}
+
+.summary-card--red {
+  border-color: #b91c1c;
+  color: #b91c1c;
+}
