@@ -3,12 +3,12 @@ const router = express.Router();
 const controller = require('../controllers/authController');
 
 router.route('/')
-  .get(controller.getAll)     // GET    /api/users
-  .post(controller.create);   // POST   /api/users
+  .get(controller.getAll)     // GET    /api/auth
+  .post(controller.create);   // POST   /api/auth
 
 router.route('/:id')
-  .get(controller.getById)    // GET    /api/users/:id
-  .put(controller.update)     // PUT    /api/users/:id
-  .delete(controller.remove); // DELETE /api/users/:id
+  .get(controller.getById)    // GET    /api/auth/:id
+  .put(controller.update)     // PUT    /api/auth/:id
+  .delete(controller.remove); // DELETE /api/auth/:id
 
 module.exports = router;
