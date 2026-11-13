@@ -17,19 +17,9 @@ const foodItemSchema = new mongoose.Schema(
     },
 
     category: {
-        type: String,
-        required: true,
-        enum: [
-            "Dairy",
-            "Produce",
-            "Meat",
-            "Seafood",
-            "Bakery",
-            "Pantry",
-            "Frozen",
-            "Beverages",
-            "Other"
-        ]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        required: true
     },
 
     quantity: {
@@ -39,16 +29,9 @@ const foodItemSchema = new mongoose.Schema(
     },
 
     unit: {
-        type: String,
-        required: true,
-        enum: [
-            "pcs",
-            "g",
-            "kg",
-            "mL",
-            "L",
-            "packs"
-        ]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Unit",
+        required: true
     },
 
     expirationDate: {
@@ -68,7 +51,4 @@ foodItemSchema.index({
     expirationDate: 1
 });
 
-module.exports = mongoose.model(
-    "FoodItem",
-    foodItemSchema
-);
+module.exports = mongoose.model("FoodItem",foodItemSchema);
