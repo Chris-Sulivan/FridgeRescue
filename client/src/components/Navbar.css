@@ -1,0 +1,62 @@
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding: 16px;
+  border-bottom: 2px solid #1f2937;
+  background: #ffffff;
+}
+
+.navbar__brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.navbar__links,
+.navbar__account {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1.5px solid #6b4a4a;
+  border-radius: 999px;
+  background: #f3dcdc;
+  color: #1f2937;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar__pill.active {
+  border: 2.5px solid #1f2937;
+  font-weight: 700;
+}
+
+.navbar__pill--soon {
+  border-style: dashed;
+  border-color: #6b7280;
+  background: #ffffff;
+  color: #4b5563;
+}
+
+.navbar__tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #1f2937;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.navbar__account a {
+  font-weight: 600;
+}

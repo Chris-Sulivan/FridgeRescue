@@ -1,0 +1,76 @@
+.food-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 680px;
+  margin: 24px auto;
+  padding: 28px;
+  border: 2px solid #1f2937;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.food-form h1 {
+  margin: 0;
+}
+
+.food-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.food-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Only fields that sit side by side share the row's width */
+.food-form__row > .food-form__field {
+  flex: 1 1 200px;
+}
+
+.food-form__field label {
+  font-weight: 600;
+}
+
+.food-form__field input,
+.food-form__field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1.5px solid #6b7280;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #1f2937;
+  font: inherit;
+}
+
+/* Make dropdowns match the text boxes in every browser */
+.food-form__field select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231f2937' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.food-form__field--error input,
+.food-form__field--error select {
+  border-color: #b91c1c;
+}
+
+.food-form__error {
+  margin: 0;
+  color: #b91c1c;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.food-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
