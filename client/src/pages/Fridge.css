@@ -1,0 +1,79 @@
+.fridge-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 8px 0 40px;
+}
+
+.fridge-page__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fridge-page__head h1 {
+  margin: 0;
+}
+
+.fridge-page__count {
+  margin: 4px 0 0;
+  color: #4b5563;
+}
+
+.fridge-page__filters {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+}
+
+.fridge-page__chip {
+  flex: none;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1.5px solid #9ca3af;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #1f2937;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fridge-page__chip[aria-pressed='true'] {
+  border-color: #1f2937;
+  background: #1f2937;
+  color: #ffffff;
+}
+
+.fridge-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.fridge-page__empty {
+  padding: 48px 20px;
+  border: 2px dashed #9ca3af;
+  border-radius: 16px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.fridge-page__empty h2 {
+  margin: 0 0 8px;
+}
+
+.fridge-page__empty p {
+  margin: 0 0 20px;
+  color: #4b5563;
+}
+
+@media (max-width: 480px) {
+  .fridge-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
