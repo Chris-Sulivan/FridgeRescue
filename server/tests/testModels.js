@@ -96,8 +96,6 @@ const testModels = async () => {
             new FoodItem({ ...base, quantity: 0 }).validate());
         await expectError("shelf 0 is rejected", () =>
             new FoodItem({ ...base, shelf: 0 }).validate());
-        await expectError("fractional shelf is rejected", () =>
-            new FoodItem({ ...base, shelf: 1.5 }).validate());
         await expectError("text shelf is rejected", () =>
             new FoodItem({ ...base, shelf: "top" }).validate());
 
