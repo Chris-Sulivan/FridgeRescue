@@ -1,8 +1,10 @@
 
 import express from 'express';
 import * as controller from '../controllers/foodItemController.js';
-
+import protect from '../middleware/authMiddleware.js';
 const router = express.Router();
+
+router.use(protect);
 
 router.route('/')
   .get(controller.getAll)

@@ -37,6 +37,11 @@ const foodItemSchema = new mongoose.Schema(
         expirationDate: {
             type: Date,
             required: true
+        },
+        shelf: {
+        type: Number,
+        min: 1,
+        default: null
         }
     },
     {
