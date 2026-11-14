@@ -60,3 +60,18 @@
 .navbar__account a {
   font-weight: 600;
 }
+
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar__logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+.navbar__user {
+  font-weight: 600;
+}

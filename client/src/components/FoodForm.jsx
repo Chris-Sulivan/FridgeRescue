@@ -1,16 +1,16 @@
 import { useState } from 'react'
+import FormField from './FormField'
+import { ErrorMessage } from './Feedback'
 import './FoodForm.css'
 
-const CATEGORIES = ['Dairy', 'Fruits', 'Vegetables', 'Meat', 'Other']
-const UNITS = ['pieces', 'g', 'kg', 'ml', 'L', 'pack']
 const SHELVES = [1, 2, 3]
 
 const EMPTY_FOOD = {
   name: '',
-  category: 'Dairy',
+  categoryId: '',
   quantity: 1,
-  unit: 'pieces',
-  shelf: 1,
+  unitId: '',
+  shelf: '',
   expirationDate: '',
 }
 
@@ -21,8 +21,14 @@ function validate(values) {
   if (!String(values.name).trim()) {
     errors.name = 'Food name is required.'
   }
+  if (!values.categoryId) {
+    errors.categoryId = 'Choose a category.'
+  }
   if (values.quantity === '' || Number(values.quantity) <= 0) {
     errors.quantity = 'Quantity must be greater than 0.'
+  }
+  if (!values.unitId) {
+    errors.unitId = 'Choose a unit.'
   }
   if (!values.expirationDate) {
     errors.expirationDate = 'Expiration date is required.'
@@ -33,14 +39,27 @@ function validate(values) {
 
 // One form for both adding and editing.
 // Pass initialValues to edit an existing item; leave it out to add a new one.
-function FoodForm({ initialValues, onSave, onCancel }) {
+// categories and units are the lists from the API: [{ id, name }]
+function FoodForm({ initialValues, categories, units, onSave, onCancel, saving = false, error = '' }) {
   const isEditing = Boolean(initialValues)
-  const [values, setValues] = useState({ ...EMPTY_FOOD, ...initialValues })
+  const [values, setValues] = useState({
+    ...EMPTY_FOOD,
+    ...(initialValues && {
+      name: initialValues.name,
+      categoryId: initialValues.categoryId,
+      quantity: initialValues.quantity,
+      unitId: initialValues.unitId,
+      shelf: initialValues.shelf,
+      expirationDate: initialValues.expirationDate,
+    }),
+  })
   const [errors, setErrors] = useState({})
 
   function handleChange(event) {
     const { name, value } = event.target
     setValues((current) => ({ ...current, [name]: value }))
+    // Clear this field's error as soon as the user edits it
+    setErrors((current) => ({ ...current, [name]: undefined }))
   }
 
   function handleSubmit(event) {
@@ -54,99 +73,97 @@ function FoodForm({ initialValues, onSave, onCancel }) {
       ...values,
       name: String(values.name).trim(),
       quantity: Number(values.quantity),
-      shelf: Number(values.shelf),
+      shelf: values.shelf === '' ? '' : Number(values.shelf),
     })
-  }
-
-  function fieldClass(fieldName) {
-    return errors[fieldName]
-      ? 'food-form__field food-form__field--error'
-      : 'food-form__field'
   }
 
   return (
     <form className="food-form" onSubmit={handleSubmit} noValidate>
       <h1>{isEditing ? 'Edit food' : 'Add food'}</h1>
 
-      <div className={fieldClass('name')}>
-        <label htmlFor="food-name">Food name</label>
-        <input
-          id="food-name"
-          name="name"
-          type="text"
-          placeholder="Milk"
-          value={values.name}
+      <ErrorMessage message={error} />
+
+      <FormField
+        label="Food name"
+        name="name"
+        type="text"
+        placeholder="Milk"
+        value={values.name}
+        onChange={handleChange}
+        error={errors.name}
+      />
+
+      <FormField
+        as="select"
+        label="Category"
+        name="categoryId"
+        value={values.categoryId}
+        onChange={handleChange}
+        error={errors.categoryId}
+      >
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>{category.name}</option>
+        ))}
+      </FormField>
+
+      <div className="food-form__row">
+        <FormField
+          label="Quantity"
+          name="quantity"
+          type="number"
+          min="0"
+          step="any"
+          value={values.quantity}
           onChange={handleChange}
+          error={errors.quantity}
         />
-        {errors.name && <p className="food-form__error">{errors.name}</p>}
-      </div>
 
-      <div className={fieldClass('category')}>
-        <label htmlFor="food-category">Category</label>
-        <select
-          id="food-category"
-          name="category"
-          value={values.category}
+        <FormField
+          as="select"
+          label="Unit"
+          name="unitId"
+          value={values.unitId}
           onChange={handleChange}
+          error={errors.unitId}
         >
-          {CATEGORIES.map((category) => (
-            <option key={category} value={category}>{category}</option>
+          <option value="">Select a unit</option>
+          {units.map((unit) => (
+            <option key={unit.id} value={unit.id}>{unit.name}</option>
           ))}
-        </select>
+        </FormField>
       </div>
 
       <div className="food-form__row">
-        <div className={fieldClass('quantity')}>
-          <label htmlFor="food-quantity">Quantity</label>
-          <input
-            id="food-quantity"
-            name="quantity"
-            type="number"
-            min="1"
-            value={values.quantity}
-            onChange={handleChange}
-          />
-          {errors.quantity && <p className="food-form__error">{errors.quantity}</p>}
-        </div>
+        <FormField
+          as="select"
+          label="Shelf (optional)"
+          name="shelf"
+          value={values.shelf}
+          onChange={handleChange}
+          error={errors.shelf}
+        >
+          <option value="">No shelf</option>
+          {SHELVES.map((shelf) => (
+            <option key={shelf} value={shelf}>Shelf {shelf}</option>
+          ))}
+        </FormField>
 
-        <div className={fieldClass('unit')}>
-          <label htmlFor="food-unit">Unit</label>
-          <select id="food-unit" name="unit" value={values.unit} onChange={handleChange}>
-            {UNITS.map((unit) => (
-              <option key={unit} value={unit}>{unit}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="food-form__row">
-        <div className={fieldClass('shelf')}>
-          <label htmlFor="food-shelf">Shelf</label>
-          <select id="food-shelf" name="shelf" value={values.shelf} onChange={handleChange}>
-            {SHELVES.map((shelf) => (
-              <option key={shelf} value={shelf}>Shelf {shelf}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className={fieldClass('expirationDate')}>
-          <label htmlFor="food-expiration">Expiration date</label>
-          <input
-            id="food-expiration"
-            name="expirationDate"
-            type="date"
-            value={values.expirationDate}
-            onChange={handleChange}
-          />
-          {errors.expirationDate && (
-            <p className="food-form__error">{errors.expirationDate}</p>
-          )}
-        </div>
+        <FormField
+          label="Expiration date"
+          name="expirationDate"
+          type="date"
+          value={values.expirationDate}
+          onChange={handleChange}
+          error={errors.expirationDate}
+        />
       </div>
 
       <div className="food-form__actions">
-        <button type="submit" className="button">Save</button>
-        <button type="button" className="button button--secondary" onClick={onCancel}>
+        <button type="submit" className="button" disabled={saving}>
+          {saving ? 'Saving…' : 'Save'}
+        </button>
+        <button type="button" className="button button--secondary" onClick={onCancel} disabled={saving}>
           Cancel
         </button>
       </div>

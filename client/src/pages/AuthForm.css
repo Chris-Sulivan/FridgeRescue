@@ -1,0 +1,32 @@
+/* Login and Register reuse the .food-form look; this only adds what is different. */
+.auth-form {
+  max-width: 440px;
+  margin-top: 40px;
+}
+
+.auth-form__logo {
+  align-self: center;
+  height: 52px;
+  width: auto;
+}
+
+.auth-form__title {
+  margin: 0;
+  text-align: center;
+}
+
+.auth-form__subtitle {
+  margin: -10px 0 0;
+  color: #4b5563;
+  text-align: center;
+}
+
+.auth-form .button {
+  width: 100%;
+}
+
+.auth-form__footer {
+  margin: 0;
+  text-align: center;
+  font-size: 0.95rem;
+}

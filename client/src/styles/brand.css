@@ -1,0 +1,91 @@
+/* FridgeRescue brand layer: Classic Green theme + Inter + logo A.
+   Loaded after index.css, so it re-colors the existing components without changing their markup.
+   To change a color, edit the variables below. Do not hard-code hex values in components. */
+
+@font-face { font-family: 'Inter'; font-weight: 400; font-display: swap; src: url('../assets/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 600; font-display: swap; src: url('../assets/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 700; font-display: swap; src: url('../assets/fonts/inter-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 800; font-display: swap; src: url('../assets/fonts/inter-latin-800-normal.woff2') format('woff2'); }
+
+:root {
+  --fr-primary: #2e7d32;
+  --fr-primary-dark: #1b5e20;
+  --fr-tint: #e8f5e9;
+  --fr-surface: #ffffff;
+  --fr-ink: #263238;
+  --fr-muted: #546e7a;
+  --fr-border: #cfd8dc;
+
+  --fr-fresh: #2e7d32;
+  --fr-fresh-bg: #e8f5e9;
+  --fr-soon: #ffc107;
+  --fr-soon-bg: #fff8e1;
+  --fr-soon-text: #6d4c00;
+  --fr-expired: #d32f2f;
+  --fr-expired-bg: #ffebee;
+
+  color: var(--fr-ink);
+  background: var(--fr-tint);
+}
+
+body { background: var(--fr-tint); }
+a { color: var(--fr-primary); }
+h1, h2, h3 { color: var(--fr-ink); font-weight: 800; letter-spacing: -0.01em; }
+
+/* Buttons */
+.button { border-color: var(--fr-primary); background: var(--fr-primary); border-radius: 8px; }
+.button:hover { background: var(--fr-primary-dark); border-color: var(--fr-primary-dark); }
+.button--secondary { background: var(--fr-surface); color: var(--fr-primary); }
+.button--secondary:hover { background: var(--fr-tint); border-color: var(--fr-primary); }
+.button--danger { border-color: var(--fr-expired); background: var(--fr-expired); color: #fff; }
+.button--danger:hover { background: #b71c1c; border-color: #b71c1c; }
+.button:focus-visible { outline: 3px solid rgba(46, 125, 50, 0.4); outline-offset: 2px; }
+.button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Navigation */
+.navbar { border-bottom: 1px solid var(--fr-border); box-shadow: 0 1px 3px rgba(38, 50, 56, 0.12); }
+.navbar__pill { border: 1.5px solid transparent; background: transparent; color: var(--fr-ink); }
+.navbar__pill:hover { background: var(--fr-tint); }
+.navbar__pill.active { border-color: var(--fr-primary); background: var(--fr-primary); color: #fff; }
+.navbar__pill--soon { border: 1.5px dashed var(--fr-border); color: var(--fr-muted); }
+.navbar__pill--soon:hover { background: transparent; }
+.navbar__tag { background: var(--fr-primary); }
+
+/* Forms */
+.food-form { border: 1px solid var(--fr-border); border-radius: 14px; box-shadow: 0 1px 3px rgba(38, 50, 56, 0.12); }
+.food-form__field input, .food-form__field select { border-color: var(--fr-border); border-radius: 6px; color: var(--fr-ink); }
+.food-form__field input:focus, .food-form__field select:focus { outline: none; border-color: var(--fr-primary); box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.3); }
+.food-form__field--error input, .food-form__field--error select { border-color: var(--fr-expired); }
+.food-form__error { color: var(--fr-expired); }
+
+/* Expiration status: fresh / expiring / expired */
+.expiration-badge--green { background: var(--fr-fresh-bg); color: var(--fr-fresh); }
+.expiration-badge--yellow { background: var(--fr-soon-bg); color: var(--fr-soon-text); border: 1.5px solid var(--fr-soon); }
+.expiration-badge--red { background: var(--fr-expired-bg); color: var(--fr-expired); border: 1.5px solid var(--fr-expired); }
+.expiration-alert__warning { background: var(--fr-expired-bg); color: var(--fr-expired); }
+.expiration-alert__item { border-top-color: var(--fr-border); }
+
+.summary-card { border-color: var(--fr-border); color: var(--fr-ink); }
+.summary-card--green { background: var(--fr-fresh-bg); color: var(--fr-fresh); border-color: var(--fr-fresh); }
+.summary-card--yellow { background: var(--fr-soon-bg); color: var(--fr-soon-text); border-color: var(--fr-soon); }
+.summary-card--red { background: var(--fr-expired-bg); color: var(--fr-expired); border-color: var(--fr-expired); }
+
+/* Dashboard fridge */
+.fridge { border-color: var(--fr-primary); background: var(--fr-surface); }
+.fridge:focus-visible { outline-color: var(--fr-primary); }
+.fridge__door--top { border-bottom-color: var(--fr-primary); }
+.fridge__handle { border-color: var(--fr-primary); background: var(--fr-tint); }
+.fridge__cta { border-color: var(--fr-primary); color: var(--fr-primary); }
+.dashboard__title { color: var(--fr-muted); }
+
+/* My Fridge */
+.food-card { border-color: var(--fr-border); }
+.food-card--green { border-left-color: var(--fr-fresh); }
+.food-card--yellow { border-left-color: var(--fr-soon); }
+.food-card--red { border-left-color: var(--fr-expired); }
+.fridge-page__chip { border-color: var(--fr-border); }
+.fridge-page__chip:hover { background: var(--fr-tint); }
+.fridge-page__chip[aria-pressed='true'] { border-color: var(--fr-primary); background: var(--fr-primary); color: #fff; }
+.fridge-page__empty { border-color: var(--fr-border); }
+.spinner__circle { border-color: var(--fr-border); border-top-color: var(--fr-primary); }
+.error-message { border-color: var(--fr-expired); background: var(--fr-expired-bg); color: var(--fr-expired); }
