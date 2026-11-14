@@ -36,7 +36,16 @@ const foodItemSchema = new mongoose.Schema(
 
         expirationDate: {
             type: Date,
-            required: true
+            required: true   
+        },
+
+        shelf: {
+            type: Number,
+            min: 1,
+            validate: {
+                validator: (value) => value == null || Number.isInteger(value),
+                message: "shelf must be a whole number"
+            }
         }
     },
     {
